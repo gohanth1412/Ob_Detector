@@ -2,9 +2,13 @@ package co.spirbase.framework.presentation.home
 
 import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
+import co.spirbase.R
 import co.spirbase.framework.model.TodoModel
+import co.spirbase.util.displayToast
 import co.spirbase.util.setPreventDoubleClick
 import co.spirbase.util.showAddTodoDialog
+import com.permissionx.guolindev.PermissionX
+import com.permissionx.guolindev.callback.RequestCallback
 
 fun HomeFragment.backEvent() {
     activity?.onBackPressedDispatcher?.addCallback(this, true) {
@@ -35,5 +39,22 @@ fun HomeFragment.addNewTodoEvent() {
             )
             viewModel.getAllTodo()
         })
+    }
+}
+
+fun HomeFragment.openCameraEvent() {
+    binding.tvOpenCamera.setPreventDoubleClick {
+        PermissionX.init(this)
+            .permissions(
+                android.Manifest.permission.CAMERA,
+                android.Manifest.permission.RECORD_AUDIO
+            )
+            .request { allGranted, _, _ ->
+                if (allGranted) {
+                    safeNav(R.id.homeFragment, R.id.action_homeFragment_to_obDetectorFragment)
+                } else {
+                    displayToast("Need permission")
+                }
+            }
     }
 }

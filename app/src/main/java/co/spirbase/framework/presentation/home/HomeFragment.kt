@@ -19,6 +19,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         backEvent()
         setUpAdapter()
         addNewTodoEvent()
+        openCameraEvent()
     }
 
     override fun subscribeObserver(view: View) {

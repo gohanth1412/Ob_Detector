@@ -80,7 +80,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 
-    //Okhttp3
+    // Okhttp3
     implementation(platform(libs.okhttp.bom))
     implementation(libs.okhttp3.okhttp)
     implementation(libs.okhttp3.logging.interceptor)
@@ -92,4 +92,13 @@ dependencies {
     // Glide
     api(libs.glide)
     annotationProcessor(libs.glide.compiler)
+
+    // PermissionX
+    implementation(libs.permissionx)
+
+    api(libs.cameraview)
+
+    implementation("org.tensorflow:tensorflow-lite:2.13.0")
+    implementation("org.tensorflow:tensorflow-lite-support:0.4.3")
+    implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.3")
 }
