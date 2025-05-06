@@ -20,6 +20,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "SpirBase"
+rootProject.name = "ObDetector"
 include(":app")
  
