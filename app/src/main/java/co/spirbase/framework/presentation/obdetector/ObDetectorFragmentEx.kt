@@ -15,6 +15,8 @@ import co.spirbase.util.setPreventDoubleClickScaleView
 import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.frame.Frame
 import com.otaliastudios.cameraview.frame.FrameProcessor
+import com.otaliastudios.cameraview.size.AspectRatio
+import com.otaliastudios.cameraview.size.SizeSelectors
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
@@ -40,7 +42,7 @@ fun ObDetectorFragment.onBackPressed() {
 fun ObDetectorFragment.setUpImageProcessor() {
     objectDetector = ObjectDetector.createFromFileAndOptions(
         context,
-        "obdetect.tflite",
+        "mobilenetv1.tflite",
         ObjectDetector.ObjectDetectorOptions.builder()
             .setMaxResults(5)
             .setScoreThreshold(0.5f)

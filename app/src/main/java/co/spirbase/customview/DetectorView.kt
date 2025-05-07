@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.RectF
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import kotlin.math.max
 
@@ -17,7 +18,8 @@ class DetectorView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
     private val paintBox = Paint()
     private var listRectBox = listOf<RectF>()
-    private var scaleFactor = 1f
+    private var scaleFactorX = 1f
+    private var scaleFactorY = 1f
 
     init {
         paintBox.apply {
@@ -28,7 +30,8 @@ class DetectorView @JvmOverloads constructor(
     }
 
     fun setListBox(listRect: List<RectF>, frameWidth: Int, frameHeight: Int) {
-        scaleFactor = max(height.toFloat() / frameHeight, width.toFloat() / frameWidth)
+        scaleFactorX = width.toFloat() / frameWidth
+        scaleFactorY = height.toFloat() / frameHeight
         listRectBox = listRect
         postInvalidate()
     }
@@ -36,12 +39,12 @@ class DetectorView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         for (rectBox in listRectBox) {
-//            rectBox.apply {
-//                left *= scaleFactor
-//                top *= scaleFactor
-//                right *= scaleFactor
-//                bottom *= scaleFactor
-//            }
+            rectBox.apply {
+                left *= scaleFactorX
+                top *= scaleFactorY
+                right *= scaleFactorX
+                bottom *= scaleFactorY
+            }
             canvas.drawRect(rectBox, paintBox)
         }
     }
