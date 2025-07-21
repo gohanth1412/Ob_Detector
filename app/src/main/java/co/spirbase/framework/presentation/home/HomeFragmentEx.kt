@@ -51,7 +51,7 @@ fun HomeFragment.openCameraEvent() {
             )
             .request { allGranted, _, _ ->
                 if (allGranted) {
-                    safeNav(R.id.homeFragment, R.id.action_homeFragment_to_obDetectorFragment)
+                    safeNav(R.id.homeFragment, R.id.action_homeFragment_to_cameraXFragment)
                 } else {
                     displayToast("Need permission")
                 }

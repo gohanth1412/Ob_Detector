@@ -18,14 +18,22 @@
         android:id="@+id/homeFragment"
         android:name="co.spirbase.framework.presentation.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_obDetectorFragment"
             app:destination="@id/obDetectorFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_cameraXFragment"
+            app:destination="@id/cameraXFragment" />
     </fragment>
     <fragment
         android:id="@+id/obDetectorFragment"
         android:name="co.spirbase.framework.presentation.obdetector.ObDetectorFragment"
         android:label="ObDetectorFragment"
-        tools:layout="@layout/fragment_ob_detector"/>
+        tools:layout="@layout/fragment_ob_detector" />
+    <fragment
+        android:id="@+id/cameraXFragment"
+        android:name="co.spirbase.framework.presentation.camerax.CameraXFragment"
+        android:label="CameraXFragment"
+        tools:layout="@layout/fragment_camera_x" />
 </navigation>

@@ -64,7 +64,12 @@ fun ObDetectorFragment.setUpCamera() {
     }
 }
 
-private fun ObDetectorFragment.processFrame(data: ByteArray, width: Int, height: Int, imageRotation: Int) {
+private fun ObDetectorFragment.processFrame(
+    data: ByteArray,
+    width: Int,
+    height: Int,
+    imageRotation: Int
+) {
     val bitmap = nv21ToBitmap(data, width, height)
     var tensorImage = TensorImage.fromBitmap(bitmap)
 
@@ -76,13 +81,7 @@ private fun ObDetectorFragment.processFrame(data: ByteArray, width: Int, height:
     val results = objectDetector?.detect(tensorImage)
 
     results?.let {
-        val listBox = it.map { detection -> detection.boundingBox }.toMutableList()
-        for (detection in it) {
-            val category = detection.categories.firstOrNull()?.label ?: "Unknown"
-            val score = detection.categories.firstOrNull()?.score ?: 0f
-            Log.d("CHECKDETECTOR", "category: $category, score: $score")
-        }
-        binding.detectorView.setListBox(listBox, height, width)
+        binding.detectorView.setListDetection(it, height, width)
     }
 }
 
