@@ -50,14 +50,17 @@ fun CameraXFragment.setUpCameraX() {
 }
 
 fun CameraXFragment.processImageProxy(imageProxy: ImageProxy) {
-    val rotationDegrees = imageProxy.imageInfo.rotationDegrees
+
+    if (imageProcessor == null) {
+        val rotationDegrees = imageProxy.imageInfo.rotationDegrees
+        imageProcessor = ImageProcessor.Builder()
+            .add(Rot90Op(-rotationDegrees / 90))
+            .build()
+    }
+
     val image = imageProxy.toBitmap()
 
     var tensorImage = TensorImage.fromBitmap(image)
-
-    imageProcessor = ImageProcessor.Builder()
-        .add(Rot90Op(-rotationDegrees / 90))
-        .build()
 
     tensorImage = imageProcessor?.process(tensorImage)
     val results = objectDetector?.detect(tensorImage)
@@ -74,7 +77,7 @@ fun CameraXFragment.setUpImageProcessor() {
         context,
         "mobilenetv1.tflite",
         ObjectDetector.ObjectDetectorOptions.builder()
-            .setMaxResults(5)
+            .setMaxResults(1)
             .setScoreThreshold(0.5f)
             .build()
     )
